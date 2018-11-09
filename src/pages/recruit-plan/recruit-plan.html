@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../lib/bootstrap-table/bootstrap-table.min.css">
+    <link rel="stylesheet" href="../../css/common/common.css"/>
+    <link rel="stylesheet" href="../../css/recruit-plan/recruit-plan.css"/>
+    <title>需求计划创建</title>
+</head>
+<!--招生计划创建页面-张子腾 2018年10月10日10:43:24-->
+<body>
+<ol class="breadcrumb">
+    <li><a href="#">后台管理系统</a></li>
+    <li class="active">需求计划</li>
+</ol>
+<div class="container">
+    <div class="page-header">
+        <h3>需求计划</h3>
+    </div>
+    <!--搜索部分-->
+    <div class="search-content">
+        <div class="search-head">
+            <form>
+                <div class="search-from form-group">
+                    <label>企业名称：</label>
+                    <input type="text" class="from-controller" name="SSK" id="select-input-schname" placeholder="请输入企业名称" aria-describedby="sizing-addon2">
+                </div>
+                <div  class="search-from form-group">
+                    <label>项目名称：</label>
+                    <input type="text" class="from-controller" name="SSK" id="select-input-majname" placeholder="请输入项目名称">
+                </div>
+                <div class="search-from form-group">
+                    <label>开发类型：</label>
+                    <select class="from-controller" id="" style="width: 180px;" >
+                        <option selected>请选择开发类型</option>
+                        <option>Web网站</option>
+                        <option>APP开发</option>
+                        <option>微信公众号</option>
+                        <option>小程序</option>
+                        <option>HTML5应用</option>
+                        <option>其他项目</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="search-submit">
+            <button class="btn btn-primary" id="search-button">搜索</button>
+            <button class="btn" id="reset-button">重置</button>
+        </div>
+    </div>
+    <hr>
+    <!--2018年10月10日11:15:31 表格新增修改删除按钮-->
+    <div class="btn-left">
+        <button type="button" class="btn btn-primary" onclick="AddPlanModal()" data-target="#add-plan-modal" data-toggle="modal" style="padding: 6px 20px;">创建</button>
+        <button type="button" class="btn btn-success" onclick="AlterPlanModal()" style="padding: 6px 20px;">修改</button>
+        <button type="button" class="btn btn-danger" onclick="DeletePlan()" style="padding: 6px 20px;">删除</button>
+
+        <!--<div class="select-creatYear">-->
+            <!--<label for="selectCreatYear" class="转·control-label">年份：</label>-->
+            <!--<select class="from-controller" id="selectCreatYear" style="width: 100px" onchange="">-->
+                <!--<option value="">2015</option>-->
+                <!--<option value="">2016</option>-->
+                <!--<option value="">2017</option>-->
+                <!--<option value="" selected>2018</option>-->
+            <!--</select>-->
+        <!--</div>-->
+
+    </div>
+    <br>
+    <div id="plan-table">
+        <table id="plan-table-all" style="text-align: center;"></table>
+    </div>
+</div>
+
+<!--创建修改按钮模态窗-->
+<div class="modal fade" id="add-plan-modal">
+    <div class="modal-dialog" role="document" style="width: 450px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" id="close-modal">&times;</span>
+                </button>
+                <h3 id="plan-modal-title">创建需求计划</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="margin: 0 auto">
+                    <div class="col-xs-12 form-horizontal" id="add-plan-info">
+                        <div class="form-group">
+                            <div class="col-sm-12 form-inline">
+                                <label for="add-update-select-SchName" class="col-sm-4 control-label">企业名称：</label>
+                                <select class="from-controller" id="add-update-select-SchName" style="width: 200px;" onchange="schNameByPro(this.value)">
+                                </select>
+                                <br><span id="show-span-schNameIsNull" class="IsNull" style="color: red;"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12 form-inline">
+                                <label for="add-update-select-MajName" class="col-sm-4 control-label">项目名称：</label>
+                                <select class="from-controller" id="add-update-select-MajName" style="width: 200px;">
+                                </select>
+                                <br><span id="show-span-majNameIsNull" class="IsNull" style="color: red;"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12 form-inline">
+                                <label for="add-update-select-ProName" class="col-sm-4 control-label">开发类型：</label>
+                                <select class="from-controller" id="add-update-select-ProName" style="width: 200px;" onchange="proNameBySch(this.value)">
+                                </select>
+                                <br><span id="show-span-proNameIsNull" class="IsNull" style="color: red;"></span>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                            <div class="col-sm-12 form-inline">
+                                <label for="add-update-input-PlanNum" class="col-sm-4 control-label">招生人数：</label>
+                                <input type="text" class="form-control need-check not-null" style="width: 200px;" regex="account" maxlength="3" id="add-update-input-PlanNum" placeholder="请输入招生人数">
+                                <br><span id="show-span-planNumIsNull" class="IsNull" style="color: red"></span>
+                            </div>
+                        </div>-->
+
+                        <div class="modal-footer" style="text-align: center">
+                            <!--<button class="btn" data-dismiss="modal">取消</button>-->
+                            <button class="btn btn-primary save-check" style="width: 200px;" id="button-modal" onclick="tiJiao()">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--**********JS部分*********-->
+<script src="../../lib/js/jquery.min.js"></script>
+<script src="../../../config/config.js"></script>
+<script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../lib/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../lib/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../utils/common-util.js"></script>
+<script src="../../utils/const-manager.js"></script>
+<script src="../../js/recruit-plan/recruit-plan.js"></script>
+
+</body>
+</html>

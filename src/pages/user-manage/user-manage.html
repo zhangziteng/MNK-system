@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../lib/bootstrap-table/bootstrap-table.min.css">
+    <link rel="stylesheet" href="../../css/common/common.css"/>
+    <link rel="stylesheet" href="../../css/user-manage/user-manage.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.9/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <title>需求信息管理</title>
+</head>
+<body>
+<!--用户管理 刘志杰 2018-10-09-->
+<ol class="breadcrumb">
+    <li><a href="#">后台管理系统</a></li>
+    <li class="active">需求信息管理</li>
+</ol>
+<div class="content-box">
+    <div class="page-header">
+        <h3>需求方信息</h3>
+    </div>
+    <!--考生信息录入 刘志杰 2018-10-12-->
+    <div class="content-section">
+        <form class="form-body">
+            <div class="row">
+                <div class="form-horizontal">
+                        <!--考生信息主键-->
+                        <input type="hidden"  id="basicinfo-input-examineekey">
+                        <!--<div class="form-group">-->
+                            <!--<label for="basicinfo-input-quasiexaminationnumber"-->
+                                   <!--class="col-sm-3 control-label ">准考证号 </label>-->
+                            <!--<div class="col-sm-5">-->
+                                <!--<input type="text" class="form-control " id="basicinfo-input-quasiexaminationnumber"-->
+                                       <!--disabled>-->
+                                <!--<span class="alert-warn"></span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label for="basicinfo-input-realname"
+                                   class="col-sm-3 control-label required">企业类型 </label>
+                            <div class="col-sm-5">
+                                <select id="basicinfo-input-realname" class="form-control" style="width: 100%;" multiple="multiple">
+                                    <option value="2">电商</option>
+                                    <option value="0">P2P金融</option>
+                                    <option value="1">爬虫</option>
+                                    <option value="2">医疗O2O</option>
+                                    <option value="0">旅游020</option>
+                                    <option value="1">餐饮生鲜020</option>
+                                    <option value="2">运动类O2O</option>
+                                    <option value="0">直播</option>
+                                    <option value="1">内容管理CMS</option>
+                                    <option value="2">教育</option>
+                                    <option value="0">交通</option>
+                                    <option value="1">智能硬件</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label required" style="top: 5px;">选择您招募的开发者类型 </label>
+                            <div class="col-sm-5">
+                                <div class="radio">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="basicinfo-radio-sex" value="团队" >招募团队（金额需大于10000元）
+                                    </label>
+                                    <br>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="basicinfo-radio-sex" value="个人">招募个人（金额需小于50000元）
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="basicinfo-input-age" class="col-sm-3 control-label required">企业名称</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control need-check not-null"
+                                       regex="number"
+                                       maxlength="2" id="basicinfo-input-age"
+                                       placeholder="请输入年龄">
+                                <span class="alert-warn"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="basicinfo-input-idcardnumber"
+                                   class="col-sm-3 control-label required">企业资质</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control need-check not-null"
+                                       regex="idNumber3" maxlength="18" id="basicinfo-input-idcardnumber"
+                                       placeholder="请输入身份证号">
+                                <span class="alert-warn"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-input-introduction"
+                                   class="col-sm-3 control-label">企业简介</label>
+                            <div class="col-sm-5">
+                                <!--<input type="text" class="form-control need-check"-->
+                                       <!--maxlength="50" id="basicinfo-input-registeredresidence"-->
+                                       <!--placeholder="请输入招募要求">-->
+                                <textarea class="form-control" maxlength="500" rows="3" style="width: 100%;"  id="add-input-introduction" placeholder="您可以对开发者所在地区、从事行业、擅长技能等方面提出要求"></textarea>
+                                <span class="alert-warn"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="basicinfo-input-phonenumber"
+                                   class="col-sm-3 control-label required">联系信息</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control need-check not-null"
+                                       regex="number"
+                                       maxlength="11" id="basicinfo-input-phonenumber"
+                                       placeholder="请输入手机号">
+                                <span class="alert-warn"></span>
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        <label for=""
+                               class="col-sm-3 control-label">相关文档</label>
+                        <div class="col-sm-5">
+                            <!--<input type="text" class="form-control need-check"-->
+                                   <!--regex="number"-->
+                                   <!--maxlength="11" id=""-->
+                                   <!--placeholder="请输入手机号">-->
+                            <input id="input-id" type="file" class="file" data-preview-file-type="text" >
+                            <span class="alert-warn"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-btn">
+                <!--当点击保存按钮的时候，需要将表单中所有绑定need-check的项都进行重新验证，
+                    此时需要在按钮上绑定class:save-check
+                    并且添加属性check-area=""，属性值为要验证的区域id-->
+                <button type="button" class="btn btn-info save-check" onclick="saveinfomation()">录入
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+<!--模态框（用户创建、修改）-->
+<!--<div class="modal fade drag-modal" id="my-modal" data-backdrop="static">-->
+    <!--<div class="modal-dialog" role="document">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                    <!--<span aria-hidden="true">&times;</span>-->
+                <!--</button>-->
+                <!--<h4>标题</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-12 form-horizontal" id="open-dialog">-->
+                        <!--<input type="hidden"-->
+                               <!--id="modal-input-key">-->
+                        <!--<div class="form-group">-->
+                            <!--&lt;!&ndash;requred 必填样式（红色星号）&ndash;&gt;-->
+                            <!--<label for="modal-input-account" class="col-sm-2 control-label required">登录账户 </label>-->
+                            <!--<div class="col-sm-10">-->
+                                <!--<input type="text" class="form-control need-check not-null" maxlength="10"-->
+                                       <!--regex="account"-->
+                                       <!--id="modal-input-account" placeholder="请输入登录账户">-->
+                                <!--&lt;!&ndash;并且必须在表单项紧挨着的下方添加如下标签&ndash;&gt;-->
+                                <!--<span class="alert-warn"></span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--&lt;!&ndash;requred 必填样式（红色星号）&ndash;&gt;-->
+                            <!--<label for="modal-input-password" class="col-sm-2 control-label required">密码 </label>-->
+                            <!--<div class="col-sm-10">-->
+                                <!--<input type="text" class="form-control need-check not-null" maxlength="10"-->
+                                       <!--regex="account"-->
+                                       <!--id="modal-input-password" placeholder="请输入密码">-->
+                                <!--&lt;!&ndash;并且必须在表单项紧挨着的下方添加如下标签&ndash;&gt;-->
+                                <!--<span class="alert-warn"></span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-2 control-label required">状态 </label>-->
+                            <!--<div class="col-sm-10">-->
+                                <!--<div class="radio">-->
+                                    <!--<label class="radio-inline">-->
+                                        <!--<input type="radio" class="need-check not-null" name="modal-radio-status" value="1">启用-->
+                                    <!--</label>-->
+                                    <!--<label class="radio-inline">-->
+                                        <!--<input type="radio" class="need-check not-null" name="modal-radio-status" value="0">停用-->
+                                    <!--</label>-->
+                                <!--</div>-->
+                                <!--<span class="alert-warn"></span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-2 control-label required">身份 </label>-->
+                            <!--<div class="col-sm-10">-->
+                                <!--<select id="modal-select-role" class="form-control need-check not-null">-->
+                                    <!--<option value="">请选择</option>-->
+                                    <!--<option value="0">考生</option>-->
+                                    <!--<option value="1">管理员</option>-->
+                                    <!--<option value="2">招生者</option>-->
+                                <!--</select>-->
+                                <!--<span class="alert-warn"></span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">取消-->
+                <!--</button>-->
+                <!--&lt;!&ndash;当点击保存按钮的时候，需要将表单中所有绑定need-check的项都进行重新验证，-->
+                    <!--此时需要在按钮上绑定class:save-check-->
+                    <!--并且添加属性check-area=""，属性值为要验证的区域id&ndash;&gt;-->
+                <!--<button type="button" class="btn btn-info save-check" check-area="open-dialog"-->
+                        <!--onclick="saveInfo()">保存-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<script src="../../lib/js/jquery.min.js"></script>
+<script src="../../../config/config.js"></script>
+<script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../lib/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../lib/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../utils/common-util.js"></script>
+<script src="../../utils/const-manager.js"></script>
+<script src="../../js/user-manage/user-manage.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.9/js/fileinput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.9/js/locales/zh.js"></script>
+</body>
+</html>

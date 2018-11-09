@@ -1,0 +1,136 @@
+/*录取管理 刘志杰 2018-10-11*/
+body, html {
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.content-box {
+    width: 100%;
+    height: 100%;
+}
+
+.header-section {
+    width: 100%;
+    padding-top: 1%;
+    padding-bottom: 2%;
+    padding-left: 2%;
+}
+
+.content-box .page-header {
+    padding-bottom: 11px;
+    margin: -22px 0 0;
+    border-bottom: 1px solid #eee;
+}
+
+.content-box .page-header h3 {
+    margin-left: 1.5%;
+    margin-top: 40px;
+}
+
+.content-section {
+    width: 100%;
+    height: 10%;
+    padding-left: 3%;
+    padding-right: 4%;
+    margin-top: 2%;
+}
+
+.content-section .select-section {
+    width: 100%;
+    height: 110px;
+}
+
+.content-section .select-section .h3 {
+    margin-bottom: 3%;
+}
+
+.content-section .select-section .select-input {
+    float: left;
+    width: 100%;
+}
+
+.content-section .select-section .select-input input {
+    width: 150px;
+}
+
+.content-section .select-input {
+    margin-left: 10px;
+}
+
+.content-section .select-section label {
+    float: left;
+    width: 250px;
+    padding-right: 20px;
+}
+
+.content-section .select-section .select-btn {
+    float: left;
+    width: 220px;
+    /*margin-top: 3%;*/
+    margin-left: 45%;
+}
+
+.content-section .select-section .select-btn input.btn {
+    margin-left: 2%;
+    width: 100px;
+}
+
+.table-section .matriculate-btn {
+    margin-bottom: 2%;
+}
+
+.table-section #my-table tr, .table-section #my-table .th-inner {
+    text-align: center;
+}
+
+.table-section .matriculate-btn button {
+    width: 100px;
+}
+
+.modal input[type='text'] {
+    width: 300px;
+}
+
+.modal .modal-body {
+    margin-left: 3%;
+    margin-right: 8%;
+}
+.search-content {
+    margin-bottom: 72px;
+    width: 100%;
+    /*height: 0%;*/
+    margin-top: 20px;
+    margin-bottom: 75px;
+}
+
+.search-head {
+    height: 50%;
+    width: 95%;
+}
+
+.search-from {
+    width: 25%;
+    /*width: 500px;*/
+    float: left;
+    margin-left: 1%;
+}
+
+.search-submit {
+    float: right;
+    width: 23%;
+}
+
+.from-controller {
+    /*display: block;*/
+    /*width: 100%;*/
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 150px;
+}

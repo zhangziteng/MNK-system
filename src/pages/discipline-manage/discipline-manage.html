@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../lib/bootstrap-table/bootstrap-table.min.css">
+    <link rel="stylesheet" href="../../css/common/common.css"/>
+    <link rel="stylesheet" href="../../css/discipline-manage/discipline-manage.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.9/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <title>项目管理</title>
+</head>
+<body>
+<ol class="breadcrumb">
+    <li><a href="#">后台管理系统</a></li>
+    <li class="active">项目管理</li>
+</ol>
+<div class="container">
+    <div class="page-header">
+        <h3>项目管理</h3>
+    </div>
+    <!--搜索部分-->
+    <div class="search-content">
+        <div class="search-head">
+            <form>
+                <div class="search-from form-group" style="margin-top: 0;">
+                    <label>项目名称：</label>
+                    <input type="text" class="from-controller" id="discipline-input-search" placeholder="请输入项目名称">
+                </div>
+            </form>
+        </div>
+        <div class="search-submit">
+            <button class="btn btn-primary" id="plan-button-search" onclick="SearchPlan()">搜索</button>
+            <button class="btn" id="plan-button-reset" onclick="ResetPlanInput()">重置</button>
+        </div>
+    </div>
+    <hr>
+    <!--2018年10月11日09:41:02 表格新增修改删除按钮-->
+    <div class="btn-left">
+        <button type="button" class="btn btn-primary" onclick="AddDisciplineModal()" data-target="#add-discipline-modal" data-toggle="modal" style="padding: 6px 20px;">创建</button>
+        <button type="button" class="btn btn-success" onclick="AlterDisciplineModal()" style="padding: 6px 20px;">修改</button>
+        <button type="button" class="btn btn-danger" onclick="DeleteDiscipline()" style="padding: 6px 20px;">删除</button>
+    </div>
+    <br>
+    <div id="discipline-table">
+        <table id="discipline-table-all" style="text-align: center;"></table>
+    </div>
+</div>
+
+<!--创建修改按钮模态窗-->
+<div class="modal fade" id="add-discipline-modal" data-backdrop="static">
+    <div class="modal-dialog" role="document" style="width: 520px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 id="discipline-modal-title">创建项目</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="margin: 0 auto;">
+                    <div class="col-xs-12 form-horizontal" id="add-discipline-info">
+                        <!--<div class="form-group">-->
+                            <!--<div class="col-sm-12 form-inline">-->
+                                <!--<label for="add-input-discipline" class="col-sm-4 control-label">专业名称：</label>-->
+                                <!--<input type="text" class="form-control not-null" style="width: 200px;" maxlength="30" id="add-input-discipline" placeholder="请输入专业名称">-->
+                                <!--<span class="alert-warn" style="margin: 0px 130px 0px;"></span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label for="basicinfo-input-realname"
+                                   class="col-sm-3 control-label required">项目类型 </label>
+                            <div class="col-sm-5">
+                                <select id="basicinfo-input-realname" class="form-control" style="width: 150%;" multiple="multiple">
+                                    <option value="2">电商</option>
+                                    <option value="0">P2P金融</option>
+                                    <option value="1">爬虫</option>
+                                    <option value="2">医疗O2O</option>
+                                    <option value="0">旅游020</option>
+                                    <option value="1">餐饮生鲜020</option>
+                                    <option value="2">运动类O2O</option>
+                                    <option value="0">直播</option>
+                                    <option value="1">内容管理CMS</option>
+                                    <option value="2">教育</option>
+                                    <option value="0">交通</option>
+                                    <option value="1">智能硬件</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="basicinfo-input-age" class="col-sm-3 control-label required">项目名称</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control need-check not-null"
+                                       maxlength="20" id="basicinfo-input-age"
+                                       placeholder="请输入项目名称，20字符以内" style="width: 260px;">
+                                <span class="alert-warn"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="basicinfo-input-idcardnumber"
+                                   class="col-sm-3 control-label required">企业预算</label>
+                            <div class="col-sm-5">
+                                <div class="input-group" style="width: 260px;">
+                                    <input type="text" class="form-control need-check" placeholder="个人项目金额小于50000" maxlength="10" id="basicinfo-input-idcardnumber" aria-describedby="basic-addon2">
+                                    <span class="alert-warn"></span>
+                                    <span class="input-group-addon" id="basic-addon2">元</span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-input-introduction"
+                                   class="col-sm-3 control-label">项目描述</label>
+                            <div class="col-sm-5">
+                                <!--<input type="text" class="form-control need-check"-->
+                                <!--maxlength="50" id="basicinfo-input-registeredresidence"-->
+                                <!--placeholder="请输入招募要求">-->
+                                <textarea class="form-control" maxlength="500" rows="3" style="width: 260px;"  id="add-input-introduction" placeholder="请尽量详细描述您的项目，以吸引更多有相关开发经验的开发者报名（20 个字符以上）"></textarea>
+                                <span class="alert-warn"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add-input-introduction"
+                                   class="col-sm-3 control-label">招募要求</label>
+                            <div class="col-sm-5">
+                                <!--<input type="text" class="form-control need-check"-->
+                                <!--maxlength="50" id="basicinfo-input-registeredresidence"-->
+                                <!--placeholder="请输入招募要求">-->
+                                <textarea class="form-control" maxlength="500" rows="3" style="width: 260px;"  id="add-input-introduction" placeholder="您可以对开发者所在地区、从事行业、擅长技能等方面提出要求"></textarea>
+                                <span class="alert-warn"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">相关文档</label>
+                            <div class="col-sm-5" style="width: 300px;">
+                                <!--<input type="text" class="form-control need-check"-->
+                                <!--regex="number"-->
+                                <!--maxlength="11" id=""-->
+                                <!--placeholder="请输入手机号">-->
+                                <input id="input-id" type="file" class="file" data-preview-file-type="text">
+                                <span class="alert-warn"></span>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="text-align: center;">
+                            <!--<button class="btn" data-dismiss="modal">取消</button>-->
+                            <button class="btn btn-primary save-check" onclick="AddDiscipline()" id="add-button-submit" style="width: 200px;">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--**********JS部分*********-->
+<script src="../../lib/js/jquery.min.js"></script>
+<script src="../../../config/config.js"></script>
+<script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../lib/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../lib/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../utils/common-util.js"></script>
+<script src="../../utils/const-manager.js"></script>
+<script src="../../js/discipline-manage/discipline-manage.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.9/js/fileinput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.9/js/locales/zh.js"></script>
+</body>
+</html>

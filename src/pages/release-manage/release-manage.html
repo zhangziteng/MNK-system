@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../lib/bootstrap-table/bootstrap-table.min.css">
+    <link rel="stylesheet" href="../../css/common/common.css"/>
+    <link rel="stylesheet" href="../../css/release-manage/release-manage.css"/>
+    <link rel="stylesheet" href="../../css/release-manage/laydate.css">
+    <title>发布管理</title>
+</head>
+<body>
+<ol class="breadcrumb">
+    <li><a href="#">后台管理系统</a></li>
+    <li class="active">发布管理</li>
+</ol>
+<!--发布管理 刘志杰 2018-10-10 -->
+<div class="content-box">
+    <div class="content-section">
+            <div class="h3">发布需求</div>
+        <hr>
+            <div class="search-content">
+                <div class="search-head">
+                    <form>
+                        <div class="search-from form-group">
+                            <label>企业名称：</label>
+                            <input type="text" class="from-controller" name="SSK" id="select-input-schName" placeholder="请输入学校名称" aria-describedby="sizing-addon2">
+                        </div>
+                        <div  class="search-from form-group">
+                            <label>项目名称：</label>
+                            <input type="text" class="from-controller" name="SSK" id="select-input-majName" placeholder="请输入专业名称">
+                        </div>
+                        <div class="search-from form-group">
+                            <label>开发类型：</label>
+                            <select class="from-controller" id="" style="width: 180px;" >
+                                <option selected>请选择开发类型</option>
+                                <option>Web网站</option>
+                                <option>APP开发</option>
+                                <option>微信公众号</option>
+                                <option>小程序</option>
+                                <option>HTML5应用</option>
+                                <option>其他项目</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="search-submit">
+                    <button class="btn btn-primary" id="search-button" style="width: 35%;">搜索</button>
+                    <button class="btn" id="reset-button" style="width: 35%;">重置</button>
+                </div>
+            </div>
+
+
+        <!--操作按钮-->
+        <hr>
+        <div class="btn-section">
+            <button class="btn btn-primary btn-open"  onclick="openModel()">发布
+            </button>
+        </div>
+        <div class="table-section">
+            <table id="adminssions-table"></table>
+        </div>
+    </div>
+</div>
+<!--模态框（用户创建、修改）-->
+<div class="modal fade drag-modal" id="my-modal" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4>发布</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 form-horizontal" id="open-dialog">
+                        <input type="hidden"
+                               id="modal-input-key">
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label ">下线时间：</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="update-input-offlinetime" placeholder="请选择下线时间">
+                                <span class="alert-warn"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                </button>
+                <!--当点击保存按钮的时候，需要将表单中所有绑定need-check的项都进行重新验证，
+                    此时需要在按钮上绑定class:save-check
+                    并且添加属性check-area=""，属性值为要验证的区域id-->
+                <button type="button" class="btn btn-info save-check" check-area="open-dialog" onclick="publishAdminssions()">发布
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../lib/js/jquery.min.js"></script>
+<script src="../../../config/config.js"></script>
+<script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../lib/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../lib/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../lib/layer/laydate.js"></script>
+<script src="../../utils/common-util.js"></script>
+<script src="../../utils/const-manager.js"></script>
+<script src="../../js/release-manage/release-manage.js"></script>
+<script src="../../js/release-manage/laydate.js"></script>
+
+</body>
+</body>
+</html>

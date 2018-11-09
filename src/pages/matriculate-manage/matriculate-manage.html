@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../lib/bootstrap-table/bootstrap-table.min.css">
+    <link rel="stylesheet" href="../../css/common/common.css"/>
+    <link rel="stylesheet" href="../../css/matriculate-manage/matriculate-manage.css"/>
+    <title>招募管理</title>
+</head>
+<body>
+<!--发布管理-->
+<ol class="breadcrumb">
+    <li><a href="#">后台管理系统</a></li>
+    <li class="active">招募管理</li>
+</ol>
+<div class="content-box">
+    <div class="content-section">
+        <div class="h3">招募管理</div>
+        <hr>
+        <div class="search-content">
+            <div class="search-head">
+                <form>
+                    <div  class="search-from form-group">
+                        <label>项目名称：</label>
+                        <input type="text" class="from-controller" id="search-input-school" placeholder="请输入项目名称">
+                    </div>
+                </form>
+            </div>
+            <div class="search-submit">
+                <button class="btn btn-primary" id="search-button" onclick="selectMatriculate()" style="width: 35%;">搜索</button>
+                <button class="btn" id="reset-button" style="width: 35%;">重置</button>
+            </div>
+        </div>
+        <!--操作按钮-->
+        <hr>
+        <div class="btn-section">
+            <button class="btn btn-primary"style="width: 80px;" onclick="openModel()">招募</button>
+        </div>
+        <div class="table-section">
+            <table id="my-table"></table>
+        </div>
+    </div>
+</div>
+<!--模态框（录取）-->
+<!--<div class="modal fade drag-modal" id="matriculate-modal" data-backdrop="static">-->
+    <!--<div class="modal-dialog" role="document">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                    <!--<span aria-hidden="true">&times;</span>-->
+                <!--</button>-->
+                <!--<h4>录取</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-12 form-horizontal" id="open-dialog">-->
+                        <!--<input type="hidden" id="modal-input-key">-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label required">录取时间：</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input type="text" class="form-control need-check not-null" id="matriculate-input-admissiontime"-->
+                                       <!--placeholder="录取时间">-->
+
+                                <!--<span class="alert-warn"></span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">取消-->
+                <!--</button>-->
+                <!--&lt;!&ndash;当点击保存按钮的时候，需要将表单中所有绑定need-check的项都进行重新验证，-->
+                    <!--此时需要在按钮上绑定class:save-check-->
+                    <!--并且添加属性check-area=""，属性值为要验证的区域id&ndash;&gt;-->
+                <!--<button type="button" class="btn btn-info save-check" check-area="open-dialog"-->
+                        <!--onclick="confirm()">确认-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--模态框（个人信息）-->
+<!--<div class="modal fade drag-modal" id="personalinfo-modal" data-backdrop="static">-->
+    <!--<div class="modal-dialog" role="document">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                    <!--<span aria-hidden="true">&times;</span>-->
+                <!--</button>-->
+                <!--<h4>个人信息</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-12 form-horizontal" >-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="basicinfo-input-quasiexaminationnumber" class="col-sm-3 control-label ">准考证号 </label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input type="text" class="form-control " id="basicinfo-input-quasiexaminationnumber"-->
+                                       <!--disabled>-->
+
+
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="basicinfo-input-realname"-->
+                                   <!--class="col-sm-3 control-label ">真实姓名 </label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input type="text" class="form-control "-->
+                                       <!--id="basicinfo-input-realname"-->
+                                       <!--disabled>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label class="col-sm-3 control-label ">性别 </label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<div class="radio">-->
+                                    <!--<label class="radio-inline">-->
+                                        <!--<input type="radio" name="basicinfo-radio-sex"-->
+                                               <!--value="男" disabled> 男-->
+                                    <!--</label>-->
+                                    <!--<label class="radio-inline">-->
+                                        <!--<input type="radio" name="basicinfo-radio-sex"-->
+                                               <!--value="女" disabled> 女-->
+                                    <!--</label>-->
+                                <!--</div>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="basicinfo-input-age" class="col-sm-3 control-label ">年龄</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input type="text" class="form-control need-check not-null"-->
+                                       <!--id="basicinfo-input-age"-->
+                                       <!--disabled>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="basicinfo-input-idcardnumber"-->
+                                   <!--class="col-sm-3 control-label ">身份证号</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input type="text" class="form-control need-check not-null"-->
+                                       <!--id="basicinfo-input-idcardnumber"-->
+                                       <!--disabled>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="basicinfo-input-registeredresidence"-->
+                                   <!--class="col-sm-3 control-label ">户口所在地</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input type="text" class="form-control need-check not-null"-->
+                                       <!--id="basicinfo-input-registeredresidence"-->
+                                       <!--disabled>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+
+                            <!--<label for="basicinfo-input-politicaloutlook"-->
+                                   <!--class="col-sm-3 control-label ">政治面貌</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input type="text" class="form-control need-check not-null"-->
+                                       <!--id="basicinfo-input-politicaloutlook"-->
+                                       <!--disabled>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="basicinfo-input-nativeplace"-->
+                                   <!--class="col-sm-3 control-label ">籍贯</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input type="text" class="form-control need-check not-null"-->
+                                       <!--id="basicinfo-input-nativeplace"-->
+                                       <!--disabled>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+
+                            <!--<label for="basicinfo-input-email" class="col-sm-3 control-label ">邮箱地址</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input type="text" class="form-control need-check not-null"-->
+                                       <!--id="basicinfo-input-email"-->
+                                       <!--disabled>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="basicinfo-input-phonenumber"-->
+                                   <!--class="col-sm-3 control-label ">手机号</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input type="text" class="form-control need-check not-null"-->
+                                       <!--id="basicinfo-input-phonenumber"-->
+                                       <!--disabled>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="basicinfo-input-graduateschool"-->
+                                   <!--class="col-sm-3 control-label ">毕业学校</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input type="text" class="form-control need-check not-null"-->
+                                       <!--id="basicinfo-input-graduateschool"-->
+                                       <!--disabled>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<script src="../../lib/js/jquery.min.js"></script>
+<script src="../../../config/config.js"></script>
+<script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../lib/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../lib/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../lib/layer/laydate.js"></script>
+<script src="../../utils/common-util.js"></script>
+<script src="../../utils/const-manager.js"></script>
+<script src="../../js/matriculate-manage/matriculate-manage.js"></script>
+</body>
+</html>
